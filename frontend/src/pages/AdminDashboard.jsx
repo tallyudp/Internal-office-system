@@ -44,6 +44,11 @@ function AdminDashboard() {
             <div className="admin-panel">
                 <h1 className="admin-title">Admin Dashboard</h1>
 
+                <div className="tv-url-info">
+                    <p><strong>URL for TV ({roomId}):</strong></p>
+                    <code>{window.location.protocol}//{window.location.host}/display/{roomId}</code>
+                </div>
+
                 <form onSubmit={handleSendTask}>
                     <div className="form-group">
                         <label htmlFor="room">Select Room</label>

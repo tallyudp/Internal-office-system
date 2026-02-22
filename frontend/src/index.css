@@ -58,6 +58,28 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+.tv-url-info {
+  background-color: #2c2c2c;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  border: 1px dashed #bb86fc;
+}
+
+.tv-url-info p {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.tv-url-info code {
+  color: #bb86fc;
+  font-size: 1.1rem;
+  font-weight: bold;
+  user-select: all;
+}
+
 .form-group {
   display: flex;
   flex-direction: column;
@@ -70,7 +92,8 @@ label {
   font-size: 1.1rem;
 }
 
-input, select {
+input,
+select {
   padding: 0.8rem;
   border-radius: 8px;
   border: 1px solid var(--border-color);
@@ -80,7 +103,8 @@ input, select {
   transition: border-color 0.2s;
 }
 
-input:focus, select:focus {
+input:focus,
+select:focus {
   outline: none;
   border-color: #bb86fc;
 }
@@ -164,7 +188,7 @@ button:active {
   padding: 4rem;
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
   max-width: 90%;
   width: 1000px;
 }
@@ -187,9 +211,23 @@ button:active {
   letter-spacing: 2px;
 }
 
-.priority-low { background-color: rgba(76, 175, 80, 0.2); color: var(--color-low); border: 2px solid var(--color-low); }
-.priority-medium { background-color: rgba(255, 152, 0, 0.2); color: var(--color-medium); border: 2px solid var(--color-medium); }
-.priority-high { background-color: rgba(244, 67, 54, 0.2); color: var(--color-high); border: 2px solid var(--color-high); }
+.priority-low {
+  background-color: rgba(76, 175, 80, 0.2);
+  color: var(--color-low);
+  border: 2px solid var(--color-low);
+}
+
+.priority-medium {
+  background-color: rgba(255, 152, 0, 0.2);
+  color: var(--color-medium);
+  border: 2px solid var(--color-medium);
+}
+
+.priority-high {
+  background-color: rgba(244, 67, 54, 0.2);
+  color: var(--color-high);
+  border: 2px solid var(--color-high);
+}
 
 .no-task {
   font-size: 4rem;
