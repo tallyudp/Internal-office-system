@@ -10,6 +10,18 @@ function AdminDashboard() {
     const [roomId, setRoomId] = useState(roomsList[0]);
     const [message, setMessage] = useState('');
     const [priority, setPriority] = useState('Low');
+    const [serverIp, setServerIp] = useState(window.location.hostname);
+
+    useEffect(() => {
+        socket.on('server_info', (data) => {
+            if (data && data.ip) {
+                setServerIp(data.ip);
+            }
+        });
+        return () => {
+            socket.off('server_info');
+        };
+    }, []);
 
     const handleSendTask = (e) => {
         e.preventDefault();
@@ -46,7 +58,7 @@ function AdminDashboard() {
 
                 <div className="tv-url-info">
                     <p><strong>URL for TV ({roomId}):</strong></p>
-                    <code>{window.location.protocol}//{window.location.host}/display/{roomId}</code>
+                    <code>{window.location.protocol}//{serverIp}{window.location.port ? `:${window.location.port}` : ''}/display/{roomId}</code>
                 </div>
 
                 <form onSubmit={handleSendTask}>

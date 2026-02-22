@@ -3,6 +3,21 @@ const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
 const path = require('path');
+const os = require('os');
+
+function getLocalIp() {
+  const interfaces = os.networkInterfaces();
+  for (const name of Object.keys(interfaces)) {
+    for (const iface of interfaces[name]) {
+      if (iface.family === 'IPv4' && !iface.internal) {
+        return iface.address;
+      }
+    }
+  }
+  return 'localhost';
+}
+const LOCAL_IP = getLocalIp();
+const PORT = 5000;
 
 const app = express();
 const server = http.createServer(app);
@@ -31,6 +46,7 @@ io.on('connection', (socket) => {
 
   // Send initial state to the connected client
   socket.emit('initial_state', rooms);
+  socket.emit('server_info', { ip: LOCAL_IP });
 
   // When admin sends a task
   socket.on('send_task', (payload) => {
@@ -54,7 +70,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-const PORT = 5000;
 server.listen(PORT, '0.0.0.0', () => {
   console.log(`Server listening on port ${PORT}`);
   console.log(`Access on your local network using your machine's IP address (e.g., http://<YOUR_IP>:5000)`);
