@@ -2,6 +2,7 @@ const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 const server = http.createServer(app);
@@ -17,6 +18,10 @@ const io = new Server(server, {
 app.use(cors());
 app.use(express.json());
 
+// Serve static frontend files from the "public" directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+
 // In-memory rooms object
 // rooms = { room1: { message, priority, timestamp }, ... }
 const rooms = {};
@@ -31,7 +36,7 @@ io.on('connection', (socket) => {
   socket.on('send_task', (payload) => {
     console.log('Received task:', payload);
     const { roomId, message, priority, timestamp } = payload;
-    
+
     // Update in-memory state
     rooms[roomId] = { message, priority, timestamp };
 
@@ -42,6 +47,11 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('Client disconnected:', socket.id);
   });
+});
+
+// Catch-all route for React Router (Single Page Application fallback)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 const PORT = 5000;

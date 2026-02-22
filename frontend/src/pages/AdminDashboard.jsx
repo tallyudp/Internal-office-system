@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
 
-// Connect to the socket server at port 5000 on the same host
-const socket = io(`http://${window.location.hostname}:5000`);
+// Connect to the socket server operating on the same origin (port 5000)
+const socket = io();
 
 const roomsList = ['room1', 'room2', 'room3', 'room4', 'room5'];
 

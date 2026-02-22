@@ -1,15 +1,24 @@
 {
-  "name": "backend",
-  "version": "1.0.0",
-  "description": "Local Network Office Room Task Display System Backend",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "socket.io": "^4.7.2"
-  }
+    "name": "backend",
+    "version": "1.0.0",
+    "description": "Local Network Office Room Task Display System Backend",
+    "main": "server.js",
+    "bin": "server.js",
+    "pkg": {
+        "assets": [
+            "public/**/*"
+        ]
+    },
+    "scripts": {
+        "start": "node server.js",
+        "dev": "node server.js",
+        "build:frontend": "cd ../frontend && npm install && npm run build",
+        "copy:frontend": "if exist public rmdir /s /q public && mkdir public && xcopy /E /I /Y ..\\frontend\\dist public",
+        "build:exe": "npm i -g pkg && pkg . --targets node18-win-x64 --output OfficeTaskSystem.exe"
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.18.2",
+        "socket.io": "^4.7.2"
+    }
 }
